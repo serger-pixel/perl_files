@@ -59,4 +59,25 @@ sub copy_dir {
     }
 }
 
-copy_dir("../lab_5", "../lab_4");
+print "Откуда: ";
+my $from = <STDIN>;
+unless (defined $from) { warn "Ввод прерван.\n"; exit 1; }
+chomp $from;
+
+print "Куда: ";
+my $to = <STDIN>;
+unless (defined $to) { warn "Ввод прерван.\n"; exit 1; }
+chomp $to;
+
+if ($from eq '' || $to eq '') {
+    warn "Пустой путь, отмена.\n";
+    exit 1;
+}
+
+unless (-e $from) {
+    warn "Источник не существует: $from\n";
+    exit 1;
+}
+
+copy_dir($from, $to);
+print "\nГотово.\n";
